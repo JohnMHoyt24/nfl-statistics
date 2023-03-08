@@ -1,0 +1,7 @@
+nfl_stats.search:
+  path: '/nfl-search'
+  defaults:
+    _controller: '\Drupal\nfl_search\Controller\NflSearch::view'
+    _title: 'NFL Search'
+  requirements:
+    _permission: 'access content'

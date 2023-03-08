@@ -1,0 +1,6 @@
+name: NFL Search
+description: Allow users to search for data and statistics pertaining to the National Football League (NFL).
+package: CustomModules
+
+type: module
+core_version_requirement: ^9.0 || ^10.0
