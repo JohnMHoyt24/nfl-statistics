@@ -4,9 +4,12 @@
     
     class NflSearch extends ControllerBase{
         public function view() {
+          $content = [];
+          $content['name'] = 'My name is John';
+
             return[
-              '#type' => 'markup',
-              '#markup' => $this->t('This is going to display NFL statistics')
+              '#theme' => 'nfl-search',
+              '#content' => $content,
             ];
           }
     }
