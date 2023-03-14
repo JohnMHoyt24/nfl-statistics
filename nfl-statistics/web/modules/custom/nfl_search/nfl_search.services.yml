@@ -1,0 +1,4 @@
+services:
+  nfl_search.api_connector:
+    class: Drupal\nfl_search\NflAPIConnector
+    arguments: ['@http_client_factory']

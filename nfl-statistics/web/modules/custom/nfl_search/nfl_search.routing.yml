@@ -1,11 +1,11 @@
-nfl_stats.api_config_page:
+nfl_search.api_config_page:
   path: '/admin/config/nfl-api'
   defaults:
     _form: '\Drupal\nfl_search\Form\nflAPI'
     _title: 'NFL API - Settings'
   requirements:
     _permission: 'access content'
-nfl_stats.search:
+nfl_search.search:
   path: '/nfl-search'
   defaults:
     _controller: '\Drupal\nfl_search\Controller\NflSearch::view'

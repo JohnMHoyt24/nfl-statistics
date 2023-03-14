@@ -31,12 +31,11 @@
                 '#default_value' => $values['api_key'],
             ];
 
-            $form['actions']['#type'] = 'actions';
-            $form['actions']['#submit'] = [
-                '#type' => 'submit',
-                '#value' => $this->t('Save'),
-                '#button_type' => 'primary',
-            ];
+            $form['submit'] = [  '#type' => 'submit',  '#value' => $this->t('Save'),  '#attributes' => [    'class' => ['my-custom-class'],
+            'id' => 'my-submit-button',
+          ],
+        ];
+        
 
             return $form;
         }
