@@ -14,9 +14,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
         
         public function __construct(\Drupal\Core\Http\ClientFactory $client, LoggerInterface $logger){
             $nfl_api_config = \Drupal::state()->get(nflAPI::NFL_API_CONFIG_PAGE);
-            $api_url = ($nfl_api_config['api_base_url']) ?: 'https://nfl-team-stats1.p.rapidapi.com/teamStats';
+            $api_url = ($nfl_api_config['api_base_url']) ?: '';
             $api_key = ($nfl_api_config['api_key']) ?: '';
-
+            
             $query = ['api_key' => $api_key];
             $this->query = $query;
             $this->client = $client->fromOptions(
@@ -30,7 +30,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
         public function teamStats(){
             $data = [];
-            $endpoint = 'https://nfl-team-stats1.p.rapidapi.com/teamStats';
+            $endpoint = '/3/teamStats';
             $options = ['query' => $this->query];
             try{
                 $request = $this->client->get($endpoint, $options);
@@ -39,7 +39,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
             }
             catch(Exception $e){
                 $this->logger->error('Request Error: {message}', ['message' => $e->getMessage()]);
-                throw new HttpException(Response::HTTP_NOT_FOUND, 'Resource not found', $e);
+                //throw new HttpException(Response::HTTP_NOT_FOUND, 'Resource not found', $e);
             }
             
             return $data;
