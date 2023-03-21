@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
         private $query;
         private $logger;
         
-        public function __construct(\Drupal\Core\Http\ClientFactory $client, LoggerInterface $logger){
+        public function __construct(\Drupal\Core\Http\ClientFactory $client, $query, LoggerInterface $logger){
             $nfl_api_config = \Drupal::state()->get(nflAPI::NFL_API_CONFIG_PAGE);
             $api_url = ($nfl_api_config['api_base_url']) ?: '';
             $api_key = ($nfl_api_config['api_key']) ?: '';
