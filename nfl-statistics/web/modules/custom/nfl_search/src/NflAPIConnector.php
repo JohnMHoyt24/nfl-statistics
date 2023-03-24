@@ -6,13 +6,17 @@ use Drupal\nfl_search\Form\nflAPI;
 use Exception;
 
     class NflAPIConnector {
+        /*Tried testing API via Postman. Got an error message.
+             "message": "You are not subscribed to this API."
+        Need to subscribe to the API.
+        */
         private $client; //The HTTP client that communicates to the API
         private $query; 
         private $logger;
         
         public function __construct(ClientFactory $client){
             $nfl_api_config = \Drupal::state()->get(nflAPI::NFL_API_CONFIG_PAGE);
-            $api_url = ($nfl_api_config['api_base_url']) ?: 'https://sports.core.api.espn.com';
+            $api_url = ($nfl_api_config['api_base_url']) ?: 'https://api-american-football.p.rapidapi.com';
             $api_key = ($nfl_api_config['api_key']) ?: '';
             
             $query = ['api_key' => $api_key];
@@ -35,7 +39,7 @@ use Exception;
 
         public function teamStats(){
             $data = [];
-            $endpoint = '/v2/sports/football/leagues/nfl/athletes/14876/statistics/0';
+            $endpoint = '/players/statistics';
             $options = ['query' => $this->query];
             try{
                 $request = $this->client->get($endpoint, $options);
