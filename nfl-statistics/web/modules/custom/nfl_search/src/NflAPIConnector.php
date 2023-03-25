@@ -16,7 +16,7 @@ use Exception;
         
         public function __construct(ClientFactory $client){
             $nfl_api_config = \Drupal::state()->get(nflAPI::NFL_API_CONFIG_PAGE);
-            $api_url = ($nfl_api_config['api_base_url']) ?: 'https://api-american-football.p.rapidapi.com';
+            $api_url = ($nfl_api_config['api_base_url']) ?: 'https://americanfootballapi.p.rapidapi.com';
             $api_key = ($nfl_api_config['api_key']) ?: '';
             
             $query = ['api_key' => $api_key];
@@ -39,11 +39,12 @@ use Exception;
 
         public function teamStats(){
             $data = [];
-            $endpoint = '/players/statistics';
+            $endpoint = '/api/american-football/player/853680';
             $options = ['query' => $this->query];
             try{
                 $request = $this->client->get($endpoint, $options);
                 $result = $request->getBody()->getContents(); //Originally declared, $result
+                //$d=0;
                 $data = json_decode($result);
             }
             catch(Exception $e){

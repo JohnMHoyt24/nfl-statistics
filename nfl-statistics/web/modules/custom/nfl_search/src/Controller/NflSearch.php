@@ -17,10 +17,10 @@
         public function listStats(){
           $nfl_api_connector_service = \Drupal::service('nfl_search.api_connector');
           $nfl_list = $nfl_api_connector_service->teamStats();
-          /*if(!empty($nfl_list->results)){
-            return $nfl_list->results;
+          if(!empty($nfl_list->player)){
+            return $nfl_list->player;
           }else{
             return [];
-          }*/
+          }
         }
     }
