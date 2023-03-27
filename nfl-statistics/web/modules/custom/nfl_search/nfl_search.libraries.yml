@@ -1,0 +1,4 @@
+nfl-search-styling:
+  css:
+    theme:
+      assets/css/player-styles.css: {}

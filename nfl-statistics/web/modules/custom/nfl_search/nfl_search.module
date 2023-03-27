@@ -4,6 +4,9 @@
         return [
             'nfl-search' => [
                 'variables' => ['content' => NULL]
+            ],
+            'movie-card' => [
+                'variables' => ['content' => NULL]
             ]
         ];
     }
