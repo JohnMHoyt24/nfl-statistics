@@ -6,7 +6,7 @@
         public function view() {
           $this->listStats();
           $content = [];
-          $content['name'] = 'My name is John';
+          //$content['name'] = 'My name is John';
           $content['players'] = $this->createPlayerCard();
 
             return[

@@ -1,12 +1,16 @@
 <div class="search>
-    search bar
+    {#search bar#}
 </div>
 
 <div class="content">
-    {{ content.name }}
-    content / nfl listings
+    {% if content.players is not empty %}
+        {% for player in content.players %}
+            {{ player }}
+        {% endfor %}
+    {% endif %}
+    {#content / nfl listings#}
 </div>
 
 <div class="pagination">
-    pagination
+    {#pagination#}
 </div>

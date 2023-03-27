@@ -1,2 +1,5 @@
 <div class="player-card-wrapper">
+    {#content is defined in the NflSearch class.#}
+    <div class="player-card__image"><img src="{{ content.image }}" alt="{{ content.name }}"></div>
+    <div class="player-card__team">{{ content.team }}</div>
 </div>

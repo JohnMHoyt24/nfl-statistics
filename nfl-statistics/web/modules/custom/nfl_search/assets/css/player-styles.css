@@ -1,3 +1,15 @@
-body{
-    background-color: aqua;
-}
+.player-card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+.card {
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+} 
