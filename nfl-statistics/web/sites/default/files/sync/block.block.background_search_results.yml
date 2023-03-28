@@ -1,0 +1,21 @@
+uuid: 97d699a5-a91a-40d1-ac28-3e5da9c10aca
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - background
+id: background_search_results
+theme: background
+region: header
+weight: -5
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search results'
+  label_display: visible
+  provider: search
+  page_id: ''
+visibility: {  }

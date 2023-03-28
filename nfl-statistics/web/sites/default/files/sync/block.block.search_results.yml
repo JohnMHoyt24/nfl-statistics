@@ -1,0 +1,21 @@
+uuid: 9aa75ba9-0108-45a4-86ce-a3f1b09ed8bc
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - bootstrap
+id: search_results
+theme: bootstrap
+region: sidebar_first
+weight: 0
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search results'
+  label_display: visible
+  provider: search
+  page_id: ''
+visibility: {  }

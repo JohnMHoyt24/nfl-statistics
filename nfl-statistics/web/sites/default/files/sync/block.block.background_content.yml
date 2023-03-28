@@ -1,0 +1,22 @@
+uuid: 3db5fc7d-7d1e-4ec0-b59c-c47405cfa050
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - background
+_core:
+  default_config_hash: fNNLN48MSGSLiqwIFywCuxH2Dk_IxDbaP0kYhg_IPrg
+id: background_content
+theme: background
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,5 +1,0 @@
-name: Search Bar
-type: theme
-description: My custom Bootstrap 3 sub-theme
-base theme: bootstrap
-core_version_requirement: ^9.0 || ^10.0
