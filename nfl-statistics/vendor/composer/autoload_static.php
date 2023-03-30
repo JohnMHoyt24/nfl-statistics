@@ -120,6 +120,7 @@ class ComposerStaticInit8010b8f6788491fcee97836e10c5a99a
         ),
         'C' => 
         array (
+            'Curl\\' => 5,
             'Consolidation\\SiteProcess\\' => 26,
             'Consolidation\\SiteAlias\\' => 24,
             'Consolidation\\OutputFormatters\\' => 31,
@@ -381,6 +382,10 @@ class ComposerStaticInit8010b8f6788491fcee97836e10c5a99a
         'Dflydev\\DotAccessData\\' => 
         array (
             0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
+        ),
+        'Curl\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-curl-class/php-curl-class/src/Curl',
         ),
         'Consolidation\\SiteProcess\\' => 
         array (

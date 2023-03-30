@@ -1,14 +1,14 @@
 nfl_search.api_config_page:
-  path: '/admin/config/nfl-api'
+  path: '/find-athletes'
   defaults:
     _form: '\Drupal\nfl_search\Form\nflAPI'
-    _title: 'NFL API - Settings'
+    _title: 'Find Athletes'
   requirements:
     _permission: 'access content'
-nfl_search.search:
-  path: '/nfl-search'
-  defaults:
-    _controller: '\Drupal\nfl_search\Controller\NflSearch::view'
-    _title: 'NFL Search'
-  requirements:
-    _permission: 'access content'
+#nfl_search.search:
+  #path: '/nfl-search'
+  #defaults:
+    #_controller: '\Drupal\nfl_search\Controller\NflSearch::view'
+    #_title: 'NFL Search'
+  #requirements:
+    #_permission: 'access content'

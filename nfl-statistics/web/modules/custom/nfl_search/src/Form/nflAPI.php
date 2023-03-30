@@ -12,41 +12,48 @@
         }
 
         public function buildForm(array $form, FormStateInterface $form_state) {
-            $values = \Drupal::state()->get(self::NFL_API_CONFIG_PAGE);
+            //$values = \Drupal::state()->get(self::NFL_API_CONFIG_PAGE);
             $form = [];
 
-            $form['api_base_url'] = [
+            /*$form['api_base_url'] = [
                 '#type' => 'textfield',
                 '#title' => $this->t('API Base URL'),
                 '#description' => $this->t('This is the URL for the API'),
                 '#required' => TRUE,
                 '#default_value' => $values['api_base_url'],
-            ];
+            ];*/
 
-            $form['api_key'] = [
+            /*$form['api_key'] = [
                 '#type' => 'textfield',
                 '#title'=> $this->t('API Key'),
                 '#description' => $this->t('This is the key to access the API'),
                 '#required' => TRUE,
                 '#default_value' => $values['api_key'],
-            ];
+            ];*/
 
-            $form['submit'] = [  
-                '#type' => 'submit',  
-                '#value' => $this->t('Save'), 
-                '#attributes' => ['class' => ['my-custom-class'],
-                    'id' => 'my-submit-button',
-            ],
-        ];
+            $form['search'] = array(
+                '#type' => 'textfield',
+                '#title' => $this->t('Search for an athlete'),
+                '#required' => true,
+            );
+
+            $form['submit'] = array(
+                '#type' => 'submit',
+                '#value' => $this->t('Search'),
+              );
         
             return $form;
         }
 
-        public function submitForm(array &$form, FormStateInterface $form_state){
-            $submitted_values = $form_state->cleanValues()->getValues();
-            \Drupal::state()->set(self::NFL_API_CONFIG_PAGE, $submitted_values);
-
-            $messenger = \Drupal::service('messenger');
-            $messenger->addMessage($this->t('Your new configuration has been saved'));
-        }
+        function submitForm(array &$form, FormStateInterface $form_state) {
+            // Get the search query entered by the user.
+            $query = $form_state['values']['search'];
+            
+            // Create an instance of the APIConnector class.
+            $api = \Drupal::service('nfl_search.api_connector');
+            
+            // Call the search() method to search for athlete information.
+            $athlete = $api->search($query);
+            
+          }
     }

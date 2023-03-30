@@ -1,4 +1,5 @@
 <?php
+use Drupal\Core\Form\FormStateInterface;
     //Implements hook_theme().
     function nfl_search_theme($existing, $type, $theme, $path){
         return [
@@ -9,4 +10,25 @@
                 'variables' => ['content' => NULL]
             ]
         ];
+    }
+
+    //Implements the hook_form_alter().
+    function nfl_search_form_alter(&$form, FormStateInterface $form_state, $form_id){
+        //Only allow the search form to change
+        if($form_id === 'nfl_api_config_page'){
+            //A custom submit handler is added to the form
+            $form['#submit'][] = 'nfl_search_submit';
+        }
+    }
+
+    //Custom submit handler for the search form.
+    function nfl_search_submit($form, FormStateInterface $form_state){
+        //Get the search keywords entered by the user.
+        $keywords = $form_state->getValue('nfl_api_config_page')['#value'];
+
+        //Instantiate the NFL API Connector class.
+        $api_connector = \Drupal::service('nfl_search.api_connector');
+
+        //Call a method on the NFL API Connector class to perform the search.
+        $results = $api_connector->teamStats($keywords);
     }

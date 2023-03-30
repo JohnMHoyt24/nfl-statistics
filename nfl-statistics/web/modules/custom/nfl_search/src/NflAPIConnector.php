@@ -1,58 +1,60 @@
 <?php
 namespace Drupal\nfl_search;
-use Drupal\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Http\ClientFactory;
-use Drupal\nfl_search\Form\nflAPI;
-use Exception;
+require __DIR__ . '/vendor/autoload.php';
+use Curl\Curl;
+class NflAPIConnector{
+    private $base_url;
 
-    class NflAPIConnector {
-        /*Tried testing API via Postman. Got an error message.
-             "message": "You are not subscribed to this API."
-        Need to subscribe to the API.
-        */
-        private $client; //The HTTP client that communicates to the API
-        private $query; 
-        private $logger;
-        
-        public function __construct(ClientFactory $client){
-            $nfl_api_config = \Drupal::state()->get(nflAPI::NFL_API_CONFIG_PAGE);
-            $api_url = ($nfl_api_config['api_base_url']) ?: 'https://americanfootballapi.p.rapidapi.com';
-            $api_key = ($nfl_api_config['api_key']) ?: '';
-            
-            $query = ['api_key' => $api_key];
-            $this->query = $query;
-
-            $this->client = $client->fromOptions(
-                [
-                    'base_uri' => $api_url,
-                    'query' => $query,
-                ]
-            );
-            
-        }
-
-        public static function create(ContainerInterface $container){
-            return new static(
-                $container->get('nfl_search.api_connector')
-            );
-        }
-
-        public function teamStats(){
-            $data = [];
-            $endpoint = '/api/american-football/player/853680';
-            $options = ['query' => $this->query];
-            try{
-                $request = $this->client->get($endpoint, $options);
-                $result = $request->getBody()->getContents(); //Originally declared, $result
-                //$d=0;
-                $data = json_decode($result);
-            }
-            catch(Exception $e){
-                //$this->logger->error('Request Error: {message}', ['message' => $e->getMessage()]);
-                $e = 'Resource not found.';
-                echo $e;
-            }
-            
-            return $data;
-        }
+    public function __construct(){
+        //Initialize the base URL for the API.
+        $this->base_url = 'https://sports.core.api.espn.com';
     }
+
+    public function search($keywords){
+        //Build the URL for the athlete API endpoint.
+        $url = $this->base_url.'/sports/football/leagues/nfl/athletes/search?q='.urlencode($keywords);
+        //Perform the athlete request using the cURL library.
+        $response = $this->makeRequest($url);
+        //Process the response data and return the athlete information.
+        $athlete = $this->parseResponse($response);
+        return $athlete;
+    }
+
+    private function makeRequest($url){
+        $curl = curl_init();
+        //Set the options for the cURL request
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+        //Execute the cURL request
+        $response = curl_exec($curl);
+        //End the cURL session
+        curl_close($curl);
+        //Return the response data
+        return $response;
+    }
+
+    private function parseResponse($response){
+        //Process the response data and return the athlete information.
+        //Data needs to be decoded from JSON to string.
+        $data = json_decode($response, true);
+        $athletes = array();
+        foreach($data['items'] as $item){
+            $athletes[] = array(
+                'firstName' => $data['firstName'],
+                'lastName' => $data['lastName'],
+                'team' => $data['team'],
+                'displayWeight' => $data['displayWeight'],
+                'displayHeight' => $data['displayHeight'],
+                'jersey' => $data['jersey']
+            );
+        }
+        return $athletes;
+    }
+}
