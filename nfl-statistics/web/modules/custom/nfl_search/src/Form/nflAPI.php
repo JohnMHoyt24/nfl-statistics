@@ -5,10 +5,10 @@
 
     class nflAPI extends FormBase {
 
-        const NFL_API_CONFIG_PAGE = 'nfl_api_config_page:values';
+        //const NFL_API_CONFIG_PAGE = 'nfl_api_config_page:values';
 
         public function getFormId() {
-            return 'nfl_api_config_page';
+            return 'nfl_search_find_athletes';
         }
 
         public function buildForm(array $form, FormStateInterface $form_state) {
@@ -47,13 +47,14 @@
 
         function submitForm(array &$form, FormStateInterface $form_state) {
             // Get the search query entered by the user.
-            $query = $form_state['values']['search'];
+           $search = $form_state->get('search');
+           $athlete_id = \Drupal::config('nfl_search.settings')->get('athlete_id');
             
             // Create an instance of the APIConnector class.
-            $api = \Drupal::service('nfl_search.api_connector');
+            $api_connector = \Drupal::service('nfl_search.api_connector');
             
             // Call the search() method to search for athlete information.
-            $athlete = $api->search($query);
+            $results = $api_connector->search($search);
             
           }
     }

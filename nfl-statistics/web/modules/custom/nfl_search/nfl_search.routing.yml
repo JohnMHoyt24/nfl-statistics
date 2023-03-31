@@ -1,4 +1,4 @@
-nfl_search.api_config_page:
+nfl_search.find_athletes:
   path: '/find-athletes'
   defaults:
     _form: '\Drupal\nfl_search\Form\nflAPI'
