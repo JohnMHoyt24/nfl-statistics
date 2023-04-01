@@ -54,7 +54,13 @@
             $api_connector = \Drupal::service('nfl_search.api_connector');
             
             // Call the search() method to search for athlete information.
-            $results = $api_connector->search($search);
+            $results = $api_connector->search($search, $athlete_id);
+
+            $build = [
+                '#theme' => 'search_results',
+                '#results' => $results
+            ];
             
+            return $build;
           }
     }

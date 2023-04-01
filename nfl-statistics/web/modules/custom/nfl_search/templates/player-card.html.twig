@@ -1,5 +1,16 @@
-<div class="player-card-wrapper">
-    {#content is defined in the NflSearch class.#}
-    <div class="player-card__image"><img src="{{ content.image }}" alt="{{ content.name }}"></div>
-    <div class="player-card__team">{{ content.team }}</div>
-</div>
+{% if results %}
+  <div class="card-deck">
+    {% for result in results %}
+      <div class="card">
+        <div class="card-body">
+          <h5 class="athlete-name">{{ result.displayName }}</h5>
+          <p class="debut-year">{{ result.debutYear }}</p>
+        </div>
+        <div class="card-footer">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>{{ 'No results found.'|t }}</p>
+{% endif %}

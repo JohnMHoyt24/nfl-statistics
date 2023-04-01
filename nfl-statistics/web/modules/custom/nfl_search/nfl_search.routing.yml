@@ -5,6 +5,12 @@ nfl_search.find_athletes:
     _title: 'Find Athletes'
   requirements:
     _permission: 'access content'
+nfl_search.search_results:
+  path: '/search-results'
+  defaults:
+    _controller: '\Drupal\nfl_search\Controller\SearchResultsController::displaySearchResults'
+  requirements:
+    _permission: 'access content'
 #nfl_search.search:
   #path: '/nfl-search'
   #defaults:
