@@ -1,22 +1,19 @@
 <?php
 namespace Drupal\nfl_search;
+
 class NflAPIConnector {
+  const API_BASE_URL = 'https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes';
 
-public function search($search, $athlete_ids) {
-  $results = array();
+  public function searchAthletes($search_terms, $athlete_ids) {
+    $query_params = [
+      'search' => $search_terms,
+      'athleteId' => implode(',', $athlete_ids),
+    ];
 
-  // Loop through each athlete ID and make an API call for each one.
-  foreach ($athlete_ids as $athlete_id) {
-    // Make the API call.
-    $api_url = "https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes?q={$search}&athlete_id={$athlete_id}";
-    $response = file_get_contents($api_url);
+    $url = self::API_BASE_URL . '?' . http_build_query($query_params);
+    $response = file_get_contents($url);
+    $data = json_decode($response, true);
 
-    // Parse the API response.
-    $json_response = json_decode($response, true);
-    $results = array_merge($results, $json_response);
+    return $data;
   }
-
-  return $results;
-}
-
 }
