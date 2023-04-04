@@ -4,10 +4,10 @@ namespace Drupal\nfl_search;
 class NflAPIConnector {
   const API_BASE_URL = 'https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes';
 
-  public function searchAthletes($search_terms, $athlete_ids) {
+  public function searchAthletes($search, $athlete_ids) {
     $query_params = [
-      'search' => $search_terms,
-      'athleteId' => implode(',', $athlete_ids),
+      'search' => $search,
+      'athleteIds' => explode(',', $athlete_ids ?? ''),
     ];
 
     $url = self::API_BASE_URL . '?' . http_build_query($query_params);
